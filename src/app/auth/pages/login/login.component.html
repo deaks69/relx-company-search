@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="login-box">
+    @if (isLoggingIn$ | ngrxPush) {
+      <h2>Please wait...</h2>
+      <mat-spinner></mat-spinner>
+      <div class="loading">Logging you in...</div>
+    } @else {
+      <h2>Login</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" formControlName="email" id="email" type="text"/>
+
+          @if (email.invalid && (email.dirty || email.touched)) {
+            <div class="error">
+              @if (email.hasError('required')) {
+                <small>Email is required</small>
+              }
+              @if (email.hasError('email')) {
+                <small>That's not a valid email address</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input class="form-control" formControlName="password" id="password" type="password"/>
+          @if (password.invalid && (password.dirty || password.touched)) {
+            <div class="error">
+              @if (password.hasError('required')) {
+                <small>Password is required</small>
+              }
+            </div>
+          }
+        </div>
+        <button [disabled]="loginForm.invalid" mat-stroked-button type="submit">Login</button>
+      </form>
+
+    }
+  </div>
+</div>

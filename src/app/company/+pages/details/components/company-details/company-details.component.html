@@ -1,0 +1,39 @@
+<main>
+  <mat-tab-group mat-align-tabs="start" mat-stretch-tabs="false">
+    <mat-tab label="Overview">
+      <div class="company-details-box">
+        <div>Registered office address</div>
+        <b id="address-snippet">{{ company?.addressSnippet }}</b>
+
+        <div class="tab-content">
+          <div class="tab-item">
+            <div>Company status</div>
+            <b id="company-status">{{ company?.companyStatus | titlecase }}</b>
+          </div>
+          <div class="tab-item">
+            <div>Company type</div>
+            <b id="company-type">{{ company?.companyType | titlecase }}</b>
+          </div>
+          <div class="tab-item">
+            <div>Incorporated on</div>
+            <b id="date-of-creation">{{ company?.dateOfCreation | date:'d MMMM yyyy' }}</b>
+          </div>
+          @if (company?.dateOfCessation) {
+            <div class="tab-item">
+              <div>Dissolved on</div>
+              <b id="date-of-cessation">{{ company?.dateOfCessation | date:'d MMMM yyyy' }}</b>
+            </div>
+          }
+        </div>
+
+      </div>
+
+    </mat-tab>
+    <mat-tab label="People">
+      <app-view-directors
+        [company]="company"
+      ></app-view-directors>
+    </mat-tab>
+  </mat-tab-group>
+
+</main>

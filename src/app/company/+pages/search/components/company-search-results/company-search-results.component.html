@@ -1,0 +1,37 @@
+@if (vm$ | ngrxPush; as vm) {
+  <main class="search-results-container">
+    <app-company-search-bar></app-company-search-bar>
+    @if (vm?.pagedResults?.length) {
+      @for (result of vm?.pagedResults; track result.companyNumber) {
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title
+              class="company-title"
+              (click)="viewCompanyDetails(result.companyNumber)"
+              [innerHTML]="result.title | highlightMatches:result.matches:'title'"
+            ></mat-card-title>
+            <mat-card-subtitle
+              [innerHTML]="result.snippet | highlightMatches:result.matches:'snippet'"></mat-card-subtitle>
+            <mat-card-subtitle>{{ result.description }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <address>{{ result.addressSnippet }}</address>
+          </mat-card-content>
+        </mat-card>
+
+      }
+      <mat-paginator
+        (page)="changePage($event)"
+        [length]="vm?.allResults?.items?.length"
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+      ></mat-paginator>
+    } @else {
+      <h2>No results found</h2>
+      <p>There are no results that match your search. Try searching again using different search criteria.</p>
+    }
+  </main>
+
+}
+
+

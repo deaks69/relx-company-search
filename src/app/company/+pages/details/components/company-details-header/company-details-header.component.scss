@@ -1,0 +1,10 @@
+header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.title-and-number {
+  display: flex;
+  flex-direction: column;
+}

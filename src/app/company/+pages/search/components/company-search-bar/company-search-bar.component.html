@@ -1,0 +1,11 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Search for a company</mat-label>
+  <input (keyup.enter)="searchCompanies(search.value)" [formControl]="search" matInput placeholder="Ex. ACME LTD">
+  <button (click)="searchCompanies(search.value)" aria-label="Search" mat-icon-button matSuffix>
+    <mat-icon>search</mat-icon>
+  </button>
+
+  @if (search.hasError('required')) {
+    <mat-error>You need to type a company name to be able to search for one...</mat-error>
+  }
+</mat-form-field>

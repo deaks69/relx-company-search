@@ -1,0 +1,67 @@
+<div class="directors-box">
+  @if (directors$ | ngrxPush; as directors) {
+    <h3
+      id="active-resignation">{{ directors?.totalResults ?? 0 }} {{ directors?.totalResults === 1 ? 'officer' : 'officers' }}
+      / {{ directors?.resignedCount ?? 0 }} {{ directors?.resignedCount === 1 ? 'resignation' : 'resignations' }} </h3>
+    <div class="directors">
+      @for (director of directors?.items; track director?.name; let first = $first; let last = $last) {
+        <div class="director">
+          <h3 id="director-name">{{ director?.name }}</h3>
+          <div>Correspondence address</div>
+          <b id="director-address">{{ director?.address | address }}</b>
+          <div class="details">
+            <div class="details-item">
+              <div class="role">
+                <div>Role</div>
+                <div
+                  id="director-status"
+                  class="status"
+                  [ngClass]="director?.resignedOn ? 'resigned' : 'active'"
+                >{{ director?.resignedOn ? 'Resigned' : 'Active' }}
+                </div>
+              </div>
+              <b id="director-role">{{ director?.officerRole | titlecase }}</b>
+            </div>
+            @if (director?.dateOfBirth; as dateOfBirth) {
+              <div class="details-item">
+                <div>Date of birth</div>
+                <b id="dob">{{ dateOfBirth?.month | month }} {{ dateOfBirth.year }}</b>
+              </div>
+            }
+            <div class="details-item">
+              <div>Appointed on</div>
+              <b id="appointed">{{ director?.appointedOn | date:"dd MMMM, yyyy" }}</b>
+            </div>
+            @if (director?.resignedOn) {
+              <div class="details-item">
+                <div>Resigned on</div>
+                <b id="resigned">{{ director?.resignedOn | date:"dd MMMM, yyyy" }}</b>
+              </div>
+            }
+            @if (director?.nationality) {
+              <div class="details-item">
+                <div>Nationality</div>
+                <b id="nationality">{{ director?.nationality }}</b>
+              </div>
+            }
+            @if (director?.countryOfResidence) {
+              <div class="details-item">
+                <div>Country of residence</div>
+                <b id="country">{{ director?.countryOfResidence }}</b>
+              </div>
+            }
+            @if (director?.occupation) {
+              <div class="details-item">
+                <div>Occupation</div>
+                <b id="occupation">{{ director?.occupation | titlecase }}</b>
+              </div>
+            }
+          </div>
+          @if (!last) {
+            <mat-divider></mat-divider>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

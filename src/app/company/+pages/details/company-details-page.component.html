@@ -1,0 +1,12 @@
+@if (selectedCompany$ | ngrxPush; as selectedCompany) {
+  <main class="company-details-container">
+    <app-company-search-bar></app-company-search-bar>
+    <app-company-details-header
+      [company]="selectedCompany"
+    ></app-company-details-header>
+    <app-company-details
+      [company]="selectedCompany"
+    ></app-company-details>
+  </main>
+}
+

@@ -1,14 +1,39 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jasmine"
-    ]
+      "vitest",
+      "node"
+    ],
+    "target": "ES2022",
+    "baseUrl": "src",
+    "paths": {
+      "@env/*": [
+        "environments/*"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
+      "@auth/*": [
+        "app/auth/*"
+      ],
+      "@company/*": [
+        "app/company/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@store/*": [
+        "app/store/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.spec.ts",
     "src/**/*.d.ts"
+  ],
+  "files": [
+    "src/test-setup.ts"
   ]
 }
